@@ -3,9 +3,8 @@
     "@truffle/contract": "^4.6.7",
     "chai": "^4.3.7",
     "lite-server": "^2.6.1"
-
   },
   "scripts": {
-    "dev" : "lite-server"
+    "dev": "lite-server"
   }
 }

@@ -2,6 +2,7 @@ App = {
     init: () => {
         console.log("Loaded")
         App.loadEthereum()
+        App.loadContracts()
     },
 
     loadEthereum: async () => {
@@ -11,6 +12,12 @@ App = {
         } else{
             console.log("instala el metamask pa")
         }
+    },
+
+    loadContracts: async () => {
+        const res = await fetch("purchaseContract.json")
+        const purchaseContractJSON = await res.json()
+        console.log(purchaseContractJSON)
     }
 }
 
