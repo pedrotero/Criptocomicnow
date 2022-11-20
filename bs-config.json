@@ -1,0 +1,15 @@
+{
+    "server":{
+        "baseDir": [
+            "./client",
+            "./build/contracts"
+        ]
+    },
+    "routes":{
+        "/libs": "./node_modules",
+        "/img": "./img"
+
+    },
+    "port": 3000
+
+}
