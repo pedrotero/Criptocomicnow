@@ -23,6 +23,7 @@ contract purchaseContract {
     struct Client{
         uint idclient;
         string name;
+        string pass;
     }
     Comic[] public comics; 
     uint public nextidComic;
@@ -43,8 +44,8 @@ contract purchaseContract {
         purchases.push(Purchase(nextIdPurchase++, _purchase_date, comics[_item_id], clients[_owner_id], clients[_buyer_id]));
     }
     
-    function createClient (string memory _name) public{
-        clients.push(Client(nextIdClients++, _name));
+    function createClient (string memory _name, string memory _pass) public{
+        clients.push(Client(nextIdClients++, _name, _pass));
     }
 
     function getPurchase(uint id) public view returns (Purchase memory){
