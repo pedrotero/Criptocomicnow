@@ -1,23 +1,33 @@
 App = {
-    init: () => {
+    contracts: {},
+    init: async () => {
         console.log("Loaded")
-        App.loadEthereum()
-        App.loadContracts()
+        await App.loadWeb3();
+        await App.loadContracts()
     },
 
-    loadEthereum: async () => {
+    loadWeb3: async () => {
         if (window.ethereum) {
-            App.web3Provider = window.ethereum
-            await window.ethereum.request({method: 'eth_requestAccounts'})
-        } else{
-            console.log("instala el metamask pa")
+          App.web3Provider = window.ethereum;
+          await window.ethereum.request({ method: "eth_requestAccounts" });
+        } else if (web3) {
+          web3 = new Web3(window.web3.currentProvider);
+        } else {
+          console.log(
+            "No ethereum browser is installed. Try it installing MetaMask "
+          );
         }
     },
 
     loadContracts: async () => {
         const res = await fetch("purchaseContract.json")
         const purchaseContractJSON = await res.json()
-        console.log(purchaseContractJSON)
+        
+        App.contracts.purchaseContract = TruffleContract(purchaseContractJSON)
+
+        App.contracts.purchaseContract.setProvider(App.web3Provider)
+
+        App.purchaseContract = await App.contracts.purchaseContract.deployed()
     }
 }
 
