@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@truffle/contract": "^4.6.7",
+    "chai": "^4.3.7"
+  }
+}
