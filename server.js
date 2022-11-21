@@ -20,9 +20,16 @@ app.get("/signup", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "signup.html"));
 })
 
+
 app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "login.html"));
 })
+
+app.post('/signup', function (req, res) {
+    console.log("created user:"+ req.body)
+    res.sendFile(path.join(__dirname, "client", "index.html"));
+    res.end();
+  });
 
 app.use((req, res) => {
     res.redirect("/product");

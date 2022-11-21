@@ -18,6 +18,12 @@ App = {
           );
         }
     },
+    loadAccount: async () => {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        App.account = accounts[0];
+      },
 
     loadContracts: async () => {
         const res = await fetch("purchaseContract.json")
@@ -28,7 +34,9 @@ App = {
         App.contracts.purchaseContract.setProvider(App.web3Provider)
 
         App.purchaseContract = await App.contracts.purchaseContract.deployed()
+    },
+
+    createUser: async(name, pass) => {
+        var result = await App.purchaseContract.createUser(name, pass)
     }
 }
-
-App.init()
