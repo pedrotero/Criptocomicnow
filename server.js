@@ -17,7 +17,8 @@ app.get("/product", (req, res) => {
 })
 
 app.get("/signup", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "signup.html"));
+    res.type('.html')
+    res.sendFile(path.join(staticPath, "signup.html"));
 })
 
 

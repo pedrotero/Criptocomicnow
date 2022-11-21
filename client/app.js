@@ -4,6 +4,7 @@ App = {
         console.log("Loaded")
         await App.loadWeb3();
         await App.loadContracts()
+        await App.loadAccount()
     },
 
     loadWeb3: async () => {
@@ -23,6 +24,7 @@ App = {
           method: "eth_requestAccounts",
         });
         App.account = accounts[0];
+        console.log(App.account);
       },
 
     loadContracts: async () => {
@@ -36,7 +38,15 @@ App = {
         App.purchaseContract = await App.contracts.purchaseContract.deployed()
     },
 
-    createUser: async(name, pass) => {
-        var result = await App.purchaseContract.createUser(name, pass)
+    createClient: async(name, pass) => {
+        try {
+            const result = await App.purchaseContract.createClient(name, pass, {
+              from: App.account,
+            });
+            console.log(result.logs[0].args);
+            window.location.reload();
+          } catch (error) {
+            console.error(error);
+          }
     }
 }
